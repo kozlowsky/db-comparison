@@ -2,7 +2,6 @@ package performence;
 
 import org.springframework.stereotype.Component;
 import performence.entity.Course;
-import performence.entity.SampleEntity;
 import performence.entity.Student;
 import performence.service.CourseService;
 import performence.service.StudentService;
