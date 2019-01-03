@@ -18,19 +18,17 @@ public class PostgresRunner {
     @Resource
     private StudentService studentService;
 
-    private int LENGTH = 100;
-
     @PostConstruct
     public void init() {
-//        deleteElements();
-        long startTime = System.currentTimeMillis();
-//        insertElements();
-        List<Student> elements =selectElements();
+        deleteElements();
 
-        long endTime = System.currentTimeMillis();
-        long timeTotal = endTime - startTime;
-        System.out.println(timeTotal + "ms time elapsed!");
-        System.out.println(elements.size());
+        long start = System.currentTimeMillis();
+
+        insertElements();
+
+        long testTime = System.currentTimeMillis() - start;
+
+        System.out.println("TEST TIME: " + testTime + "ms");
     }
 
     private long countElements() {
@@ -38,11 +36,11 @@ public class PostgresRunner {
     }
 
     private void insertElements() {
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 100; i++) {
             Course course = new Course((long) i, "Math");
             courseService.save(course);
-            for (int j = 0; j < 1000; j++) {
-                Student student = new Student((long) i * LENGTH + j, "student", "student", 1, course);
+            for (int j = 0; j < 100; j++) {
+                Student student = new Student((long) i * 100 + j, "student", "student", 1, course);
                 studentService.save(student);
             }
         }
